@@ -1,23 +1,12 @@
 #!/usr/bin/python3
-"""get hot post function"""
-
-
-import json
-import requests
+"""
+1-main
+"""
 import sys
 
-
-def top_ten(subreddit):
-    """get top ten hot post"""
+if __name__ == '__main__':
+    top_ten = __import__('1-top_ten').top_ten
     if len(sys.argv) < 2:
-        return print(None)
+        print("Please pass an argument for the subreddit to search.")
     else:
-        url = "https://www.reddit.com/r/{}/hot.json?limit=10".format(subreddit)
-        headers = {"User-Agent": "Mozilla/5.0"}
-        result = requests.get(url, headers=headers, allow_redirects=False)
-        listing = []
-        if result.status_code != 200:
-            return print(None)
-        body = json.loads(result.text)
-        for i in body["data"]["children"]:
-            print(i["data"]["title"])
+        top_ten(sys.argv[1])
